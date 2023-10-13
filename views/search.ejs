@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>search</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="overflow-x-hidden">
+    
+    <div class="flex flex-col">
+       <%- include('banner.ejs') %>
+        <%- include('header.ejs') %>
+
+
+        <!-- hero-->
+      </div>
+      <%- include('jumbotron.ejs') %>
+
+      <div class="flex flex-col space-y-2 md:flex-row md:px-16 px-4 items-center justify-center md:gap-10">
+        <!-- explore items-->
+        <div class="w-full max-w-md items-center flex flex-row h-52 p-8 rounded-xl bg-green-100 transform transition ease-in duration-200 scale-100 hover:scale-105">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold text-xl">Vegetables</div>
+            <div class="text-xs text-green-400">
+              <span>fresh produce</span>
+              <span>from the farm</span>
+            </div>
+            <div id="exploreVegetables" class="cursor-pointer  border-2 p-2 px-4 border-yellow-400 hover:bg-yellow-400 hover:text-white rounded-full">explore</div>
+          </div>
+
+          <div class="md:hidden xl:flex z-30">
+            <img src="/images/vegies.png" alt="veggies" class="transform scale-150 ml-32"/>
+          </div>
+
+        </div>
+
+         <!-- explore items-->
+         <div class="w-full max-w-md items-center flex flex-row h-52 p-8 rounded-xl bg-yellow-100 transform transition ease-in duration-200 scale-100 hover:scale-105">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold text-xl">Fruits</div>
+            <div class="text-xs text-yellow-400">
+              <span>fresh produce</span>
+              <span>from the farm</span>
+            </div>
+            <div id="exploreFruits" class="cursor-pointer border-2 p-2 px-4 border-green-400 hover:bg-green-400 hover:text-white rounded-full">explore</div>
+          </div>
+
+          <div class="md:hidden xl:flex z-30">
+            <img src="/images/fruits.png" alt="veggies" class="transform scale-150 ml-32"/>
+          </div>
+
+        </div>
+
+        <!-- explore items-->
+        <div class="w-full max-w-md items-center flex flex-row h-52 p-8 rounded-xl bg-green-100 transform transition ease-in duration-200 scale-100 hover:scale-105">
+          <div class="flex flex-col gap-2">
+            <div class="font-bold text-xl">All products</div>
+            <div class="text-xs text-green-400">
+              <span>fresh produce</span>
+              <span>from the farm</span>
+            </div>
+            <div id="exploreAll" class="cursor-pointer  border-2 p-2 px-4 border-yellow-400 hover:bg-yellow-400 hover:text-white rounded-full">explore</div>
+          </div>
+
+          <div class="md:hidden xl:flex z-30">
+            <img src="/images/products.png" alt="veggies" class="transform scale-150 ml-32"/>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-32 space-y-6 mb-10">
+      <div>
+        <div class="text-green-400 text-sm text-center font-bold">Naturally produced</div>
+        <div class="font-bold tracking-tight text-3xl text-center">Best Farm Products</div>
+      </div>
+
+      <div class="options flex flex-row items-center justify-center gap-4">
+        
+        <div id="fruits" class="p-2 px-4 rounded-full cursor-pointer border-2 border-green-400 hover:text-white hover:bg-green-400 <%= key === 'fruit' ? 'bg-green-400 text-white' : 'text-green-400' %>">fruits</div>
+        <div id="vegetables" class="p-2 px-4 rounded-full cursor-pointer border-2 border-green-400 hover:text-white hover:bg-green-400 <%= key === 'vegetable' ? 'bg-green-400 text-white' : 'text-green-400' %>">vegetables</div>
+        <div id="others" class="p-2 px-4 rounded-full cursor-pointer border-2 border-green-400 hover:text-white hover:bg-green-400 <%= key === 'other' ? 'bg-green-400 text-white' : 'text-green-400' %>">others</div>
+     
+        <div id="meat" class="p-2 px-4 rounded-full cursor-pointer text-pink-400 border-2 border-pink-400 hover:text-white hover:bg-pink-400">meat</div>
+        <div id="fish" class="p-2 px-4 rounded-full cursor-pointer text-pink-400 border-2 border-pink-400 hover:text-white hover:bg-pink-400">fish</div>
+        <div id="dairy" class="p-2 px-4 rounded-full cursor-pointer text-pink-400 border-2 border-pink-400 hover:text-white hover:bg-pink-400">dairy</div>
+     
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-5 pt-10 pb-20 flex-wrap items-center bg-gray-100 md:px-16 px-4 p-4 justify-center">
+
+      <% products.forEach((product) => { %>
+        <div onclick="chooseProduct(this)" data-id="<%= product.id %>" class="max-w-sm w-full  hover:bg-green-500  flex flex-col items-center justify-center bg-white rounded-xl p-4 transform transition ease-in duration-200 scale-100 hover:scale-105">
+          <div class="text-center space-y-2">
+            <div class="font-semibold text-xs text-green-400"><%= product.type %></div>
+            <div class="font-bold text-xl tracking-tight"><%= product.name %></div>
+          </div>
+  
+          <div class="text-center max-w-sm w-full">
+            <img src="/images/<%= product.image %>" alt="onion" class="w-72"/>
+          </div>
+  
+          <div class="font-bold text-xl"><span>GH</span> <%= product.price %></div>
+          
+        </div>
+      <% }); %>
+
+
+    </div>
+    <script src="/javascripts/query.js"></script>
+    
+    <script>
+
+      let fruits = document.querySelector('#fruits')
+      let vegetables = document.querySelector('#vegetables')
+      let others = document.querySelector('#others')
+
+      
+      let meat = document.querySelector('#meat')
+      let fish = document.querySelector('#fish')
+      let diary = document.querySelector('#dairy')
+
+      meat.addEventListener('click', (e) => makeQuery("meat"))
+      fish.addEventListener('click', (e) => makeQuery("fish"))
+      diary.addEventListener('click', (e) => makeQuery("dairy"))
+
+      let exploreVegetables = document.querySelector('#exploreVegetables')
+      let exploreFruits = document.querySelector('#exploreFruits')
+      let exploreAll = document.querySelector('#exploreAll')
+
+      fruits.addEventListener('click', (e) => makeQuery("fruit"))
+      vegetables.addEventListener('click', (e) => makeQuery("vegetable"))
+      others.addEventListener('click', (e) => makeQuery("other"))
+      exploreFruits.addEventListener('click', (e) => makeQuery('fruit'))
+      exploreVegetables.addEventListener('click', (e) => makeQuery('vegetable'))
+      exploreAll.addEventListener('click', (e) => makeQuery(''))
+
+      const chooseProduct = (e) => {
+        const getId = e.getAttribute('data-id')
+
+        console.log("chosen Product ", getId)
+        const url = `/product/${getId}`
+        history.pushState(null, null, url)
+        location.reload()
+
+
+      }
+
+
+    </script>
+  </body>
+</html>
